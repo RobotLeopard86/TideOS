@@ -124,3 +124,10 @@ while true do
     writer.write(http.get(fileRoot .. file).readAll())
     writer.close()
 end
+
+mfr.close()
+fs.delete("/OS/masterfilerecord.txt")
+term.setTextColor(colors.lime)
+print("Installation complete! Rebooting...")
+sleep(1.5)
+os.reboot()
