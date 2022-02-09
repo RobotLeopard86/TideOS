@@ -89,4 +89,19 @@ term.clear()
 print("Testing file downloads...")
 if http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/filedownloadtest.txt").readAll() == "Test succeeded!" then
     print("File downloads are working!")
+else
+    printError("File downloads aren't working. :(")
+    sleep(1)
+    os.shutdown()
 end
+
+local fileRoot = "https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS"
+
+print()
+print("Wiping computer...")
+--fs.delete("/")
+print("Computer wiped!")
+print("Downloading master file record...")
+local mfr = fs.open("/masterfilerecord.txt", "w")
+mfr.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/masterfilerecord.txt"))
+mfr.close()
