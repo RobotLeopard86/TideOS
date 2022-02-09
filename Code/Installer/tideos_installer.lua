@@ -99,7 +99,7 @@ local fileRoot = "https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/C
 
 print()
 print("Wiping computer...")
-fs.delete("/*")
+shell.run("rm /*")
 print("Computer wiped!")
 print("Downloading master file record...")
 local mfrd = fs.open("/masterfilerecord.txt", "w")
