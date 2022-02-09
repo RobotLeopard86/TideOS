@@ -111,6 +111,11 @@ local s = fs.open("/startup.lua", "w")
 s.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/startup.lua").readAll())
 s.close()
 
+print("Downloading file .settings...")
+local settings = fs.open("/.settings", "w")
+settings.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/.settings").readAll())
+settings.close()
+
 local mfr = fs.open("/masterfilerecord.txt", "r")
 
 while true do
