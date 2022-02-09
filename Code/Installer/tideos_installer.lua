@@ -102,6 +102,21 @@ print("Wiping computer...")
 --fs.delete("/")
 print("Computer wiped!")
 print("Downloading master file record...")
-local mfr = fs.open("/masterfilerecord.txt", "w")
-mfr.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/masterfilerecord.txt"))
-mfr.close()
+local mfrd = fs.open("/masterfilerecord.txt", "w")
+mfrd.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/masterfilerecord.txt").readAll())
+mfrd.close()
+print("Master file record downloaded!")
+
+local mfr = fs.open("/masterfilerecord.txt", "r")
+
+while true do
+    local file = mfr.readLine()
+    if file == nil then
+        break
+    end
+
+    print("Downloading file " .. file .. "...")
+    local writer = fs.open(file, "w")
+    writer.write(http.get(fileRoot .. file).readAll())
+    writer.close()
+end
