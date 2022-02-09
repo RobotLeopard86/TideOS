@@ -120,7 +120,7 @@ while true do
     end
 
     print("Downloading file " .. file .. "...")
-    local writer = fs.open(file, "w")
+    local writer = fs.open("/OS/.tide_os" .. file, "w")
     writer.write(http.get(fileRoot .. file).readAll())
     writer.close()
 end
