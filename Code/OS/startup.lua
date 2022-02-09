@@ -6,6 +6,8 @@ if term.isColor() then
     printError("ERROR: TideOS requires color!")
 end
 
+os.pullEvent = os.pullEventRaw
+
 term.setPaletteColor(colors.lightGray, 0xCCCCCC)
 term.setPaletteColor(colors.gray, 0x595959)
 term.setPaletteColor(colors.brown, 0xAC7339)
