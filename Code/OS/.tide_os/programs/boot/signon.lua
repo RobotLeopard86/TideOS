@@ -5,9 +5,11 @@ paintutils.drawImage(bg, 1, 1)
 local w, h = term.getSize()
 
 term.setTextColor(colors.blue)
+term.setBackgroundColor(colors.lightBlue)
 term.setCursorPos((w / 3) - 3.5, (h / 4))
 
-print("Welcome")
+print("Select your username to begin.")
+term.setCursorPos((w / 3) - 3.5, (h / 4))
 
 while true do
     sleep(0.05)
