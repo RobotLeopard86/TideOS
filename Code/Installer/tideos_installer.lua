@@ -99,7 +99,7 @@ local fileRoot = "https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/C
 
 print()
 print("Wiping computer...")
---fs.delete("/")
+fs.delete("/")
 print("Computer wiped!")
 print("Downloading master file record...")
 local mfrd = fs.open("/OS/masterfilerecord.txt", "w")
@@ -111,7 +111,7 @@ local s = fs.open("/startup.lua", "w")
 s.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/startup.lua").readAll())
 s.close()
 
-local mfr = fs.open("/OS/masterfilerecord.txt", "r")
+local mfr = fs.open("/masterfilerecord.txt", "r")
 
 while true do
     local file = mfr.readLine()
@@ -120,13 +120,13 @@ while true do
     end
 
     print("Downloading file " .. file .. "...")
-    local writer = fs.open("/OS/.tide_os" .. file, "w")
+    local writer = fs.open("/.tide_os" .. file, "w")
     writer.write(http.get(fileRoot .. file).readAll())
     writer.close()
 end
 
 mfr.close()
-fs.delete("/OS/masterfilerecord.txt")
+fs.delete("/masterfilerecord.txt")
 term.setTextColor(colors.lime)
 print("Installation complete! Rebooting...")
 sleep(1.5)
