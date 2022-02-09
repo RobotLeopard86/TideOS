@@ -6,10 +6,10 @@ local w, h = term.getSize()
 
 term.setTextColor(colors.blue)
 term.setBackgroundColor(colors.lightBlue)
-term.setCursorPos((w / 3) - 3.5, (h / 4))
+term.setCursorPos((w / 5) - 3.5, (h / 4))
 
 print("Select your username to begin.")
-term.setCursorPos((w / 3) - 3.5, (h / 4))
+term.setCursorPos((w / 5) - 3.5, (h / 4) - 1)
 
 while true do
     sleep(0.05)
