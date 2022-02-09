@@ -1,4 +1,0 @@
-/startup.lua
-/.tide_os/assets/images/signon
-/.tide_os/programs/boot/signon.lua
-/.tide_os/programs/utility/findperipherals.lua
