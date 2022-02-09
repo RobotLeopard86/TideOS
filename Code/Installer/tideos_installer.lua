@@ -86,4 +86,7 @@ term.setTextColor(colors.blue)
 term.setBackgroundColor(colors.black)
 term.setCursorPos(1, 1)
 term.clear()
-print("Downloading file record list...")
+print("Testing file downloads...")
+if http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/filedownloadtest.txt").readAll() == "Test succeeded!" then
+    print("File downloads are working!")
+end
