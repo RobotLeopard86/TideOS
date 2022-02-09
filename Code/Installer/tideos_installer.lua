@@ -102,7 +102,7 @@ print("Wiping computer...")
 fs.delete("/")
 print("Computer wiped!")
 print("Downloading master file record...")
-local mfrd = fs.open("/OS/masterfilerecord.txt", "w")
+local mfrd = fs.open("/masterfilerecord.txt", "w")
 mfrd.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/masterfilerecord.txt").readAll())
 mfrd.close()
 
