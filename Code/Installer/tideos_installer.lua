@@ -87,7 +87,7 @@ term.setBackgroundColor(colors.black)
 term.setCursorPos(1, 1)
 term.clear()
 print("Testing file downloads...")
-if http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/filedownloadtest.txt").readAll() == "Test succeeded!" then
+if http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/Installer/filedownloadtest.txt").readAll() == "Test succeeded!" then
     print("File downloads are working!")
 else
     printError("File downloads aren't working. :(")
@@ -95,7 +95,7 @@ else
     os.shutdown()
 end
 
-local fileRoot = "https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/.tide_os"
+local fileRoot = "https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/OS/.tide_os"
 
 print()
 print("Wiping computer...")
@@ -103,17 +103,17 @@ shell.run("rm /*")
 print("Computer wiped!")
 print("Downloading master file record...")
 local mfrd = fs.open("/masterfilerecord.txt", "w")
-mfrd.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/Installer/masterfilerecord.txt").readAll())
+mfrd.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/Installer/masterfilerecord.txt").readAll())
 mfrd.close()
 
 print("Downloading file startup.lua...")
 local s = fs.open("/startup.lua", "w")
-s.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/startup.lua").readAll())
+s.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/OS/startup.lua").readAll())
 s.close()
 
 print("Downloading file .settings...")
 local settings = fs.open("/.settings", "w")
-settings.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/main/Code/OS/.settings").readAll())
+settings.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/OS/.settings").readAll())
 settings.close()
 
 local mfr = fs.open("/masterfilerecord.txt", "r")
