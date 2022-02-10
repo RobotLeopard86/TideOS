@@ -8,7 +8,7 @@ term.setTextColor(colors.blue)
 term.setBackgroundColor(colors.lightBlue)
 term.setCursorPos((w / 5) - 3.5, (h / 4))
 print("Welcome!")
-term.setCursorPos((w / 5) - 3.5, (h / 4) - 1)
+term.setCursorPos((w / 5) - 3.5, (h / 4) + 2)
 print("Select your username to begin.")
 
 while true do
