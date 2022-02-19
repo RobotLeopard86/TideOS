@@ -15,10 +15,19 @@ local users = fs.list("/.tide_os/internalstorage/users")
 
 local unames = {}
 
+local unameRetrieveCounter = 1
+local rootUIndex = 1
+
 for _, ufile in ipairs(users) do
     local handle = fs.open("/.tide_os/internalstorage/users/" .. ufile, "r")
     table.insert(unames, handle.readLine())
     handle.close()
+
+    if ufile == "root.tos" then
+        rootUIndex = unameRetrieveCounter
+    end
+
+    unameRetrieveCounter = unameRetrieveCounter + 1
 end
 
 term.setTextColor(colors.black)
@@ -27,7 +36,7 @@ term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 6)
 local sr = fs.open("/.tide_os/internalstorage/config/showroot.bool", "r")
 
 if sr.readAll() == "false" then
-    table.remove(unames, "ROOT")
+    table.remove(unames, rootUIndex)
 end
 
 for _, name in ipairs(unames) do
