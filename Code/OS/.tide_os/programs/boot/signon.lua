@@ -1,4 +1,4 @@
-local bg = paintutils.loadImage("/.tide_os/assets/images/signon")
+local bg = paintutils.loadImage("/.tide_os/assets/images/signon.ccpaint")
 term.clear()
 paintutils.drawImage(bg, 1, 1)
 
@@ -40,7 +40,11 @@ if sr.readAll() == "false" then
 end
 
 for _, name in ipairs(unames) do
-    print(name)
+    term.write(name)
+    
+    local x, y = term.getCursorPos()
+
+    term.setCursorPos(x + 4, y)
 end
 
 while true do
