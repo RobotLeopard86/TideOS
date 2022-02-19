@@ -24,6 +24,12 @@ end
 term.setTextColor(colors.black)
 term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 6)
 
+local sr = fs.open("/.tide_os/internalstorage/config/showroot.bool", "r")
+
+if sr.readAll() == "false" then
+    table.remove(unames, "ROOT")
+end
+
 for _, name in ipairs(unames) do
     print(name)
 end
