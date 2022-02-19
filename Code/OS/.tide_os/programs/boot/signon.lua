@@ -31,7 +31,7 @@ for _, ufile in ipairs(users) do
 end
 
 term.setTextColor(colors.black)
-term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 6)
+term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 4)
 
 local sr = fs.open("/.tide_os/internalstorage/config/showroot.bool", "r")
 
@@ -44,7 +44,13 @@ for _, name in ipairs(unames) do
     
     local x, y = term.getCursorPos()
 
-    term.setCursorPos(x + 4, y)
+    term.setCursorPos(x + 2, y)
+
+    x, y = term.getCursorPos()
+
+    if x >= 40 then
+        term.setCursorPos((w / 6.5) - 2.5, y + 1)
+    end
 end
 
 while true do
