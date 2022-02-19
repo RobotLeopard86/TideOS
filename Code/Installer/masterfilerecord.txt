@@ -1,3 +1,4 @@
 /assets/images/signon
 /programs/boot/signon.lua
 /programs/utility/findperipherals.lua
+/internalstorage/users/root.tos
