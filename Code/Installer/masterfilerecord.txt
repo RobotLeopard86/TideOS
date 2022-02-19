@@ -1,4 +1,4 @@
-/assets/images/signon
+/assets/images/signon.ccpaint
 /programs/boot/signon.lua
 /programs/utility/findperipherals.lua
 /internalstorage/users/root.tos
