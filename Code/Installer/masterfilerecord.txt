@@ -2,3 +2,4 @@
 /programs/boot/signon.lua
 /programs/utility/findperipherals.lua
 /internalstorage/users/root.tos
+/internalstorage/config/showroot.bool
