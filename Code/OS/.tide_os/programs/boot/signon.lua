@@ -44,19 +44,19 @@ local usrScreenPositions = {}
 for _, name in ipairs(unames) do
     local ox, oy = term.getCursorPos()
 
+    local nx = ox + string.len(name)
+
+    if nx >= 40 then
+        term.setCursorPos((w / 6.5) - 2.5, oy + 1)
+    end
+
     term.write(name)
-    
+
     local x, y = term.getCursorPos()
 
     table.insert(usrScreenPositions, {ox, x, y})
 
     term.setCursorPos(x + 2, y)
-
-    x, y = term.getCursorPos()
-
-    if x >= 40 then
-        term.setCursorPos((w / 6.5) - 2.5, y + 1)
-    end
 end
 
 while true do
