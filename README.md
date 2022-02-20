@@ -12,7 +12,7 @@ How to install:
 Download the installer Lua file [here](https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/Installer/tideos_installer.lua)
 Then, place the file in your Minecraft world's 
 
-computercraft/computer/{id of target computer (get this with the "id" command)}
+computercraft/computer/{id of target computer (get this with the "id" command)} folder
 
 Then open the computer in Minecraft and execute this command: "tideos_installer"
 The installer will start, and follow the instructions within to install. :)
