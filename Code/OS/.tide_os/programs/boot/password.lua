@@ -39,12 +39,14 @@ term.setCursorPos((w / 2) - 15, (h / 6) + 4)
 local uin = read("*")
 
 if uin == pass then
-    term.setBackgroundColor(colors.green)
+    term.setBackgroundColor(colors.lime)
+    term.clear()
     term.setCursorPos((w / 2) - 5, (h / 2))
     term.setTextColor(colors.white)
     print("Signed In!")
 else
     term.setBackgroundColor(colors.red)
+    term.clear()
     term.setCursorPos((w / 2) - 9, (h / 3))
     term.setTextColor(colors.white)
     print("Password Incorrect")
