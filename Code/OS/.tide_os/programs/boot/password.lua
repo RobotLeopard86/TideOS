@@ -44,6 +44,10 @@ if uin == pass then
     term.setCursorPos((w / 2) - 5, (h / 2))
     term.setTextColor(colors.white)
     print("Signed In!")
+    sleep(0.5)
+    term.clear()
+    term.setCursorPos((w / 2) - 9, (h / 2))
+    print("Loading Desktop...")
 else
     term.setBackgroundColor(colors.red)
     term.clear()
@@ -52,4 +56,6 @@ else
     print("Password Incorrect")
     term.setCursorPos((w / 2) - 5, (h / 3) * 2)
     print("Try Again!")
+    sleep(1.5)
+    shell.run("/.tide_os/programs/boot/password.lua", args[1])
 end
