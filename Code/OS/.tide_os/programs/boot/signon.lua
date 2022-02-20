@@ -48,7 +48,7 @@ for _, name in ipairs(unames) do
     
     local x, y = term.getCursorPos()
 
-    table.insert(usrScreenPositions, {ox, x})
+    table.insert(usrScreenPositions, {ox, x, y})
 
     term.setCursorPos(x + 2, y)
 
@@ -60,5 +60,13 @@ for _, name in ipairs(unames) do
 end
 
 while true do
-    sleep(0.05)
+    local event, button, x, y = os.pullEvent("mouse_click")
+
+    if button == 1 then
+        for _, usrScreenPos in ipairs(usrScreenPositions) do
+            if x >= usrScreenPos[1] and x <= usrScreenPos[2] and y == usrScreenPos[3] then
+                disk.eject("drive_3")
+            end
+        end
+    end
 end
