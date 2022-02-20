@@ -63,9 +63,13 @@ while true do
     local event, button, x, y = os.pullEvent("mouse_click")
 
     if button == 1 then
+        local posCounter = 0
+
         for _, usrScreenPos in ipairs(usrScreenPositions) do
+            posCounter = posCounter + 1
+
             if x >= usrScreenPos[1] and x <= usrScreenPos[2] and y == usrScreenPos[3] then
-                disk.eject("drive_3")
+                shell.run("/.tide_os/programs/boot/password.lua", users[posCounter])
             end
         end
     end
