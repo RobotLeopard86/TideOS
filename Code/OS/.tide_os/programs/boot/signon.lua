@@ -39,10 +39,16 @@ if sr.readAll() == "false" then
     table.remove(unames, rootUIndex)
 end
 
+local usrScreenPositions = {}
+
 for _, name in ipairs(unames) do
+    local ox, oy = term.getCursorPos()
+
     term.write(name)
     
     local x, y = term.getCursorPos()
+
+    table.insert(usrScreenPositions, {ox, x})
 
     term.setCursorPos(x + 2, y)
 
