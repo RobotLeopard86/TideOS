@@ -14,9 +14,9 @@ paintutils.drawImage(bg, 1, 1)
 
 local w, h = term.getSize()
 
-term.setTextColor(colors.blue)
+term.setTextColor(colors.white)
 term.setBackgroundColor(colors.lightBlue)
-term.setCursorPos((w / 2) - 3.5, (h / 8))
-print("welcome")
-term.setCursorPos((w / 2) - (string.len(user) / 2), (h / 6) + 2)
+term.setCursorPos((w / 2) - 4, (h / 8))
+print("Welcome!")
+term.setCursorPos((w / 2) - (string.len(user) / 2), (h / 6) + 1)
 print(user)
