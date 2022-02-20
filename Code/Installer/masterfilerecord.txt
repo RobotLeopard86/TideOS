@@ -1,6 +1,7 @@
-/assets/images/signon.ccpaint
+/programs/boot/password.lua
 /programs/boot/signon.lua
 /programs/utility/findperipherals.lua
+/assets/images/signon.ccpaint
+/assets/images/password.ccpaint
 /internalstorage/users/root.tos
 /internalstorage/config/showroot.bool
-/programs/boot/password.lua
