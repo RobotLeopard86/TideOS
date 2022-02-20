@@ -1,5 +1,19 @@
 local args = {...}
 
+local w, h = term.getSize()
+
+local function youAreIn()
+    term.setBackgroundColor(colors.lime)
+    term.clear()
+    term.setCursorPos((w / 2) - 5, (h / 2))
+    term.setTextColor(colors.white)
+    print("Signed In!")
+    sleep(0.5)
+    term.clear()
+    term.setCursorPos((w / 2) - 9, (h / 2))
+    print("Loading Desktop...")
+end
+
 local usrf = fs.open("/.tide_os/internalstorage/users/" .. args[1], "r")
 
 local user = usrf.readLine()
@@ -7,6 +21,7 @@ local pass = usrf.readLine()
 local perm = usrf.readLine()
 
 if pass == "<none>" then
+    youAreIn()
     return
 end
 
@@ -15,8 +30,6 @@ usrf.close()
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
 term.clear()
 paintutils.drawImage(bg, 1, 1)
-
-local w, h = term.getSize()
 
 term.setTextColor(colors.black)
 term.setBackgroundColor(colors.lightBlue)
@@ -39,15 +52,7 @@ term.setCursorPos((w / 2) - 15, (h / 6) + 4)
 local uin = read("*")
 
 if uin == pass then
-    term.setBackgroundColor(colors.lime)
-    term.clear()
-    term.setCursorPos((w / 2) - 5, (h / 2))
-    term.setTextColor(colors.white)
-    print("Signed In!")
-    sleep(0.5)
-    term.clear()
-    term.setCursorPos((w / 2) - 9, (h / 2))
-    print("Loading Desktop...")
+    
 else
     term.setBackgroundColor(colors.red)
     term.clear()
