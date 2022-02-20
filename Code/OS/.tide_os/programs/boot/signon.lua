@@ -50,6 +50,8 @@ for _, name in ipairs(unames) do
         term.setCursorPos((w / 6.5) - 2.5, oy + 1)
     end
 
+    ox = term.getCursorPos()
+
     term.write(name)
 
     local x, y = term.getCursorPos()

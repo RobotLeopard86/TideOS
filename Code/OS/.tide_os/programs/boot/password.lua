@@ -6,6 +6,10 @@ local user = usrf.readLine()
 local pass = usrf.readLine()
 local perm = usrf.readLine()
 
+if pass == "<none>" then
+    return
+end
+
 usrf.close()
 
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
@@ -24,3 +28,12 @@ print(msg)
 
 term.setCursorPos((w / 2) - 13, (h / 6) + 1)
 print("Please Enter Your Password")
+
+term.setCursorPos((w / 2) - 15, (h / 6) + 4)
+term.setBackgroundColor(colors.white)
+term.setTextColor(colors.blue)
+print("                              ")
+
+term.setCursorPos((w / 2) - 15, (h / 6) + 4)
+
+local uin = read("o")
