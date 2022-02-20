@@ -3,3 +3,4 @@
 /programs/utility/findperipherals.lua
 /internalstorage/users/root.tos
 /internalstorage/config/showroot.bool
+/programs/boot/password.lua
