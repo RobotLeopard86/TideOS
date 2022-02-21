@@ -52,7 +52,7 @@ term.setCursorPos((w / 2) - 15, (h / 6) + 4)
 local uin = read("*")
 
 if uin == pass then
-    
+    youAreIn()
 else
     term.setBackgroundColor(colors.red)
     term.clear()
