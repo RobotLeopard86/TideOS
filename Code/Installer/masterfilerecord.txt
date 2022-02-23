@@ -1,6 +1,7 @@
-/programs/boot/password.lua
-/programs/boot/signon.lua
-/programs/utility/findperipherals.lua
+/programs/password.lua
+/programs/signon.lua
+/programs/findperipherals.lua
+/programs/lib/sha.lua
 /assets/images/signon.ccpaint
 /assets/images/password.ccpaint
 /internalstorage/users/root.tos

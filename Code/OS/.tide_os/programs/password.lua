@@ -1,6 +1,16 @@
+local shaLib = require("lib.sha")
+
 local args = {...}
 
 local w, h = term.getSize()
+
+local usrf = fs.open("/.tide_os/internalstorage/users/" .. args[1], "r")
+
+local user = usrf.readLine()
+local pass = usrf.readLine()
+local perm = usrf.readLine()
+
+usrf.close()
 
 local function youAreIn()
     term.setBackgroundColor(colors.lime)
@@ -12,20 +22,13 @@ local function youAreIn()
     term.clear()
     term.setCursorPos((w / 2) - 9, (h / 2))
     print("Loading Desktop...")
+    sleep(1)
 end
-
-local usrf = fs.open("/.tide_os/internalstorage/users/" .. args[1], "r")
-
-local user = usrf.readLine()
-local pass = usrf.readLine()
-local perm = usrf.readLine()
 
 if pass == "<none>" then
     youAreIn()
     return
 end
-
-usrf.close()
 
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
 term.clear()
@@ -51,7 +54,15 @@ term.setCursorPos((w / 2) - 15, (h / 6) + 4)
 
 local uin = read("*")
 
-if uin == pass then
+local saltf = fs.open("/.tide_os/internalstorage/salt.txt", "r")
+local salt = saltf.readAll()
+saltf.close()
+
+local uinSalted = uin .. salt
+
+local uinHashed = shaLib.sha(uinSalted)
+
+if uinHashed == pass then
     youAreIn()
 else
     term.setBackgroundColor(colors.red)
