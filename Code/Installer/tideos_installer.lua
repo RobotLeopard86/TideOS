@@ -141,5 +141,4 @@ fs.delete("/masterfilerecord.txt")
 term.setTextColor(colors.lime)
 print("Installation complete!")
 sleep(1.5)
-shell.openTab("/tideos_postinstall.lua")
-return
+shell.run("/tideos_postinstall.lua")
