@@ -82,6 +82,7 @@ term.setTextColor(colors.black)
 print()
 print("Okay then. Let's go!")
 
+os.pullEvent = os.pullEventRaw
 term.setTextColor(colors.blue)
 term.setBackgroundColor(colors.black)
 term.setCursorPos(1, 1)
@@ -130,9 +131,15 @@ while true do
     writer.close()
 end
 
+print("Downloading file tideos_postinstall.lua...")
+local post = fs.open("/tideos_postinstall.lua", "w")
+post.write(http.get("https://raw.githubusercontent.com/RobotLeopard86/TideOS/release/Code/Installer/tideos_postinstall.lua").readAll())
+post.close()
+
 mfr.close()
 fs.delete("/masterfilerecord.txt")
 term.setTextColor(colors.lime)
-print("Installation complete! Rebooting...")
+print("Installation complete!")
 sleep(1.5)
-os.reboot()
+shell.openTab("/tideos_postinstall.lua")
+return
