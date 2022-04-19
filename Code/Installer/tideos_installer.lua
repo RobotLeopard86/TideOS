@@ -46,12 +46,15 @@ term.setTextColor(colors.black)
 term.setCursorPos(1, 3)
 textutils.slowPrint("Hey there! Thanks for choosing TideOS!");
 term.setCursorPos(1, 6)
-print("Before we get started, there are a few things you should know about the installer:")
+textutils.slowPrint("Before we get started, there are a few things you should know about the installer:")
+sleep(0.5)
 print()
 print("#1 The TideOS installer downloads its files from GitHub. If you don't have a real-world internet connection, the installation will fail.")
+sleep(2)
 print()
 print("#2 TideOS is designed with CC: Tweaked in mind. TideOS may not work properly on the original ComputerCraft or CC: Restiched, or any other version of ComputerCraft.")
 print()
+sleep(3)
 print("With this in mind, press enter to continue.")
 
 while true do
