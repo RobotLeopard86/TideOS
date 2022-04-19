@@ -4,6 +4,16 @@ paintutils.drawImage(bg, 1, 1)
 
 local w, h = term.getSize()
 
+local compf = fs.open("/.tide_os/internalstorage/config/computer.tos", "r")
+local name = compf.readAll()
+compf.close()
+
+term.setTextColor(colors.white)
+term.setBackgroundColor(colors.blue)
+term.setCursorPos(1, 1)
+term.write(name .. "                                           ")
+term.setCursorPos(w - string.len(textutils.formatTime(os.time("local"))), 1)
+term.write(textutils.formatTime(os.time("local")))
 term.setTextColor(colors.blue)
 term.setBackgroundColor(colors.lightBlue)
 term.setCursorPos((w / 6.5) - 2.5, (h / 6))

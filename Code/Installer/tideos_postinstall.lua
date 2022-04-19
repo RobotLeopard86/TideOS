@@ -166,22 +166,40 @@ local password = getPassword()
 local admin = isAdmin()
 local root = isRootOn()
 
-frame.clear()
-frame.setTextColor(colors.black)
-frame.setCursorPos((w / 2) - 3, 1)
-frame.write("Review")
-frame.setCursorPos(w / 14, 3)
-frame.write("Username: " .. username)
-frame.setCursorPos(w / 14, 4)
-frame.write("Password: " .. password)
-frame.setCursorPos(w / 14, 5)
-frame.write("Administrator: " .. tostring(admin))
-frame.setCursorPos(w / 14, 6)
-frame.write("Root Account: " .. tostring(root))
-frame.setCursorPos(w / 14, 8)
-frame.write("Is This OK?")
-frame.setCursorPos(w / 14, 9)
-frame.write("Enter = Yes, Backspace = No")
+local showPass = false;
+
+local passwordSecret = ""
+
+for i = 0, string.len(password), 1 do
+    passwordSecret = passwordSecret .. "*"
+end
+
+local function drawData()
+    frame.clear()
+    frame.setTextColor(colors.black)
+    frame.setCursorPos((w / 2) - 3, 1)
+    frame.write("Review")
+    frame.setCursorPos(w / 14, 3)
+    frame.write("Username: " .. username)
+    frame.setCursorPos(w / 14, 4)
+    if showPass == true then
+        frame.write("Password: " .. password)
+    else
+        frame.write("Password: " .. passwordSecret)
+    end
+    frame.setCursorPos(w / 14, 5)
+    frame.write("Administrator: " .. tostring(admin))
+    frame.setCursorPos(w / 14, 6)
+    frame.write("Root Account: " .. tostring(root))
+    frame.setCursorPos(w / 14, 8)
+    frame.write("Is This OK?")
+    frame.setCursorPos(w / 14, 9)
+    frame.write("Enter = Yes, Backspace = No")
+    frame.setCursorPos(w / 14, 11)
+    frame.write("Press space to show/hide password")
+end
+
+drawData()
 
 local confirmed = false
 
@@ -195,6 +213,11 @@ while true do
     if keys.getName(key) == keys.getName(keys.backspace) then
         break
     end
+
+    if keys.getName(key) == keys.getName(keys.space) then
+        showPass = not showPass
+    end
+    drawData()
 end
 
 if not confirmed then
@@ -214,6 +237,9 @@ fs.delete("/tideos_postinstall.lua")
 local saltf = fs.open("/.tide_os/internalstorage/salt.txt", "r")
 local salt = saltf.readAll()
 saltf.close()
+
+local comp = fs.open("/.tide_os/internalstorage/config/computer.tos", "w")
+comp.writeLine(computer)
 
 local user = fs.open("/.tide_os/internalstorage/users/0.tos", "w")
 user.writeLine(username)
