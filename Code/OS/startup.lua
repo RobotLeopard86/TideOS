@@ -35,4 +35,4 @@ sleep(1)
 print("Let's go!")
 sleep(0.5)
 
-shell.run("/.tide_os/programs/signon.lua")
+shell.run("/.tide_os/programs/multishell_nomenubar.lua")
