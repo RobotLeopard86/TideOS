@@ -81,7 +81,8 @@ while true do
             posCounter = posCounter + 1
 
             if x >= usrScreenPos[1] and x <= usrScreenPos[2] and y == usrScreenPos[3] then
-                shell.run("/.tide_os/programs/password.lua", users[posCounter])
+                multishell.launch({}, "/.tide_os/programs/password.lua", users[posCounter])
+                multishell.setFocus(2)
             end
         end
     end

@@ -1,4 +1,4 @@
-local shaLib = require("lib.sha")
+local shaLib = os.loadAPI("/.tide_os/programs/lib/sha.lua")
 
 local args = {...}
 
@@ -65,6 +65,7 @@ local uinHashed = shaLib.sha(uinSalted)
 if uinHashed == pass then
     youAreIn()
 else
+    print("Yay")
     term.setBackgroundColor(colors.lightBlue)
     term.setCursorPos((w / 2) - 13, (h / 6) + 1)
     term.setTextColor(colors.red)
