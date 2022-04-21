@@ -1,4 +1,4 @@
-local shaLib = os.loadAPI("/.tide_os/programs/lib/sha.lua")
+local shaLib = require("sha")
 
 local args = {...}
 
@@ -23,6 +23,7 @@ local function youAreIn()
     term.setCursorPos((w / 2) - 9, (h / 2))
     print("Loading Desktop...")
     sleep(1)
+    return
 end
 
 if pass == "<none>" then
@@ -31,46 +32,52 @@ if pass == "<none>" then
 end
 
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
-term.clear()
-paintutils.drawImage(bg, 1, 1)
 
-term.setTextColor(colors.black)
-term.setBackgroundColor(colors.lightBlue)
+local function getPassword()
+    term.clear()
+    paintutils.drawImage(bg, 1, 1)
 
-local msg = "Hi there, " .. user
-
-term.setCursorPos((w / 2) - (string.len(msg) / 2), (h / 8))
-print(msg)
-
-term.setCursorPos((w / 2) - 13, (h / 6) + 1)
-print("Please Enter Your Password")
-
-term.setCursorPos((w / 2) - 15, (h / 6) + 4)
-term.setBackgroundColor(colors.white)
-term.setTextColor(colors.blue)
-print("                              ")
-
-term.setCursorPos((w / 2) - 15, (h / 6) + 4)
-
-local uin = read("*")
-
-local saltf = fs.open("/.tide_os/internalstorage/salt.txt", "r")
-local salt = saltf.readAll()
-saltf.close()
-
-local uinSalted = uin .. salt
-
-local uinHashed = shaLib.sha(uinSalted)
-
-if uinHashed == pass then
-    youAreIn()
-else
-    print("Yay")
+    term.setTextColor(colors.black)
     term.setBackgroundColor(colors.lightBlue)
+
+    local msg = "Hi there, " .. user
+    term.setCursorPos((w / 2) - (string.len(msg) / 2), (h / 6))
+    print(msg)
+
     term.setCursorPos((w / 2) - 13, (h / 6) + 1)
-    term.setTextColor(colors.red)
-    print("    Password Incorrect    ")
-    term.setCursorPos((w / 2) - 5, (h / 3) * 2)
-    sleep(0.5)
-    shell.run("/.tide_os/programs/password.lua", args[1])
+    print("Please Enter Your Password")
+
+    term.setCursorPos((w / 2) - 15, (h / 6) + 4)
+    term.setBackgroundColor(colors.white)
+    term.setTextColor(colors.blue)
+    print("                              ")
+
+    term.setCursorPos((w / 2) - 15, (h / 6) + 4)
+
+    local uin = read("*")
+
+    local saltf = fs.open("/.tide_os/internalstorage/salt.txt", "r")
+    local salt = saltf.readAll()
+    saltf.close()
+
+    local uinSalted = uin .. salt
+
+    local uinHashed = shaLib.sha(uinSalted)
+
+    if uinHashed == pass then
+        youAreIn()
+        return
+    else
+        term.setBackgroundColor(colors.lightBlue)
+        term.setCursorPos((w / 2) - 13, (h / 6) + 1)
+        term.setTextColor(colors.red)
+        print("    Password Incorrect    ")
+        term.setCursorPos((w / 2) - 5, (h / 3) * 2)
+        sleep(0.5)
+        getPassword()
+    end
 end
+
+getPassword()
+
+return

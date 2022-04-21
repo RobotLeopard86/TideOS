@@ -181,18 +181,15 @@ local function redrawMenu()
 end
 
 local function resizeWindows()
-    local windowY, windowHeight
-    -- Sneaky edit to stop windows from changing size without removing the function
-    windowY = 1
-    windowHeight = h
+    local _, windowHeight = term.native().getSize()
     for n = 1, #tProcesses do
         local tProcess = tProcesses[n]
         local x, y = tProcess.window.getCursorPos()
-        if y > windowHeight then
+        if false then
             tProcess.window.scroll(y - windowHeight)
             tProcess.window.setCursorPos(x, windowHeight)
         end
-        tProcess.window.reposition(1, windowY, w, windowHeight)
+        tProcess.window.reposition(1, 1, w, windowHeight)
     end
     bWindowsResized = true
 end
@@ -311,14 +308,17 @@ end
 -- Begin
 parentTerm.clear()
 setMenuVisible(false)
+local r = require "cc.require"
+local env = setmetatable({}, { __index = _ENV })
+env.require, env.package = r.make(env, "/.tide_os/programs/lib")
 launchProcess(true, {
     ["shell"] = shell,
     ["multishell"] = multishell,
+    ["require_env"] = env
 }, "/.tide_os/programs/signon.lua")
 
 -- Run processes
 while #tProcesses > 0 do
-    -- Sneaky edit to remove the menu bar
     setMenuVisible(false)
     -- Get the event
     local tEventData = table.pack(os.pullEventRaw())
@@ -406,7 +406,7 @@ while #tProcesses > 0 do
         end
     end
 
-    if bWindowsResized then
+    if false then
         -- Pass term_resize to all processes
         local nLimit = #tProcesses -- Storing this ensures any new things spawned don't get the event
         for n = 1, nLimit do
@@ -418,7 +418,6 @@ while #tProcesses > 0 do
             redrawMenu()
         end
     end
-    -- Sneaky edit to remove the menu bar (just in case it gets set between changes ;)
     setMenuVisible(false)
 end
 
