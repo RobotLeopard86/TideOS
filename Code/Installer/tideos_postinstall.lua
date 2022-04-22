@@ -36,11 +36,16 @@ local function getUsername()
     return name
 end
 
-local function getPassword()
+local function getPassword(isForRoot)
     frame.clear()
     frame.setTextColor(colors.black)
-    frame.setCursorPos((w / 2) - 4, 1)
-    frame.write("Create User")
+    if isForRoot == false then
+        frame.setCursorPos((w / 2) - 4, 1)
+        frame.write("Create User")
+    else
+        frame.setCursorPos((w / 2) - 9, 1)
+        frame.write("Root User Password")
+    end
     frame.setCursorPos(w / 14, 2)
     frame.write("Enter password: ")
     local pass = read("*")
@@ -162,16 +167,28 @@ term.setBackgroundColor(colors.white)
 frame.setBackgroundColor(colors.white)
 
 local username = getUsername()
-local password = getPassword()
+local password = getPassword(false)
 local admin = isAdmin()
 local root = isRootOn()
+local rootPassword = nil
+
+if root == true then
+    rootPassword = getPassword(true)
+end
 
 local showPass = false;
 
 local passwordSecret = ""
+local rootPasswordSecret = ""
 
-for i = 0, string.len(password), 1 do
+for i = 1, string.len(password), 1 do
     passwordSecret = passwordSecret .. "*"
+end
+
+if root == true then
+    for i = 1, string.len(rootPassword), 1 do
+        rootPasswordSecret = rootPasswordSecret .. "*"
+    end
 end
 
 local function drawData()
@@ -190,13 +207,29 @@ local function drawData()
     frame.setCursorPos(w / 14, 5)
     frame.write("Administrator: " .. tostring(admin))
     frame.setCursorPos(w / 14, 6)
-    frame.write("Root Account: " .. tostring(root))
-    frame.setCursorPos(w / 14, 8)
-    frame.write("Is This OK?")
-    frame.setCursorPos(w / 14, 9)
-    frame.write("Enter = Yes, Backspace = No")
-    frame.setCursorPos(w / 14, 11)
-    frame.write("Press space to show/hide password")
+    frame.write("Root Account Enabled: " .. tostring(root))
+
+    if root == true then
+        frame.setCursorPos(w / 14, 7)
+        if showPass == true then
+            frame.write("Root Account Password: " .. rootPassword)
+        else
+            frame.write("Root Account Password: " .. rootPasswordSecret)
+        end
+        frame.setCursorPos(w / 14, 9)
+        frame.write("Are you sure this info is correct?")
+        frame.setCursorPos(w / 14, 10)
+        frame.write("Enter = Yes, Backspace = No")
+        frame.setCursorPos(w / 14, 11)
+        frame.write("Press space to show/hide passwords")
+    else
+        frame.setCursorPos(w / 14, 8)
+        frame.write("Are you sure this info is correct?")
+        frame.setCursorPos(w / 14, 9)
+        frame.write("Enter = Yes, Backspace = No")
+        frame.setCursorPos(w / 14, 11)
+        frame.write("Press space to show/hide password")
+    end
 end
 
 drawData()
@@ -244,6 +277,11 @@ comp.writeLine(computer)
 local user = fs.open("/.tide_os/internalstorage/users/0.tos", "w")
 user.writeLine(username)
 user.writeLine(shaLib.sha(password .. salt))
+
+local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
+ru.writeLine("ROOT")
+ru.writeLine(shaLib.sha(rootPassword .. salt))
+ru.writeLine("SUPERUSER")
 
 if admin then
     user.writeLine("ADMIN")
