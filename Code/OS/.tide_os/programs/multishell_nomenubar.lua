@@ -111,9 +111,7 @@ local function cullProcess(nProcess)
                 selectProcess(1)
             end
         end
-        if nScrollPos ~= 1 then
-            nScrollPos = nScrollPos - 1
-        end
+        nScrollPos = 1
         return true
     end
     return false
@@ -138,7 +136,7 @@ else
 end
 
 local function redrawMenu()
-    if bShowMenu then
+    if false then
         -- Draw menu
         parentTerm.setCursorPos(1, 1)
         parentTerm.setBackgroundColor(menuOtherBgColor)

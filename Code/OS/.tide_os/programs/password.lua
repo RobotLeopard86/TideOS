@@ -33,7 +33,16 @@ end
 
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
 
+local didRun = false
+
 local function getPassword()
+
+    if didRun == false then
+        didRun = true
+        getPassword()
+        return    
+    end
+    
     term.clear()
     paintutils.drawImage(bg, 1, 1)
 
@@ -80,4 +89,4 @@ end
 
 getPassword()
 
-return
+shell.exit()
