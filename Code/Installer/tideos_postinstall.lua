@@ -278,10 +278,13 @@ local user = fs.open("/.tide_os/internalstorage/users/0.tos", "w")
 user.writeLine(username)
 user.writeLine(shaLib.sha(password .. salt))
 
-local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
-ru.writeLine("ROOT")
-ru.writeLine(shaLib.sha(rootPassword .. salt))
-ru.writeLine("SUPERUSER")
+if root == true then
+    local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
+    ru.writeLine("ROOT")
+    ru.writeLine(shaLib.sha(rootPassword .. salt))
+    ru.writeLine("SUPERUSER")
+    ru.close()
+end
 
 if admin then
     user.writeLine("ADMIN")
