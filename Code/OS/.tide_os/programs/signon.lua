@@ -19,7 +19,9 @@ term.setBackgroundColor(colors.lightBlue)
 term.setCursorPos((w / 6.5) - 2.5, (h / 6))
 print("Welcome!")
 term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 2)
-print("Select your username to begin.")
+print("Select your username to begin,")
+term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 3)
+print("or press space to power off.")
 
 local users = fs.list("/.tide_os/internalstorage/users")
 
@@ -41,7 +43,7 @@ for _, ufile in ipairs(users) do
 end
 
 term.setTextColor(colors.black)
-term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 4)
+term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 5)
 
 local sr = fs.open("/.tide_os/internalstorage/config/showroot.bool", "r")
 
@@ -73,6 +75,12 @@ end
 
 while true do
     local event, button, x, y = os.pullEvent("mouse_click")
+
+    local _, key = os.pullEvent("key")
+
+    if keys.getName(key) == keys.getName(keys.space) then
+        os.shutdown()
+    end
 
     if button == 1 then
         local posCounter = 0
