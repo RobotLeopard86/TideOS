@@ -276,12 +276,21 @@ comp.writeLine(computer)
 
 local user = fs.open("/.tide_os/internalstorage/users/0.tos", "w")
 user.writeLine(username)
-user.writeLine(shaLib.sha(password .. salt))
+
+if password == "" then
+    user.writeLine("<none>")
+else
+    user.writeLine(shaLib.sha(password .. salt))
+end
 
 if root == true then
     local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
     ru.writeLine("ROOT")
-    ru.writeLine(shaLib.sha(rootPassword .. salt))
+    if password == "" then
+        ru.writeLine("<none>")
+    else
+        ru.writeLine(shaLib.sha(rootPassword .. salt))
+    end
     ru.writeLine("SUPERUSER")
     ru.close()
 end
