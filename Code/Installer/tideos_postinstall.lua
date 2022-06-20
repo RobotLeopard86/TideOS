@@ -32,6 +32,14 @@ local function getUsername()
         sleep(1)
         return getUsername()
     end
+    
+    if name == "" then
+       frame.setCursorPos((w / 2) - 12, 1)
+        frame.setTextColor(colors.red)
+        frame.write("This Is A Required Field")
+        sleep(1)
+        return getUsername()
+    end
 
     return name
 end
