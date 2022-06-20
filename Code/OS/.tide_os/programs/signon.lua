@@ -19,7 +19,7 @@ term.setBackgroundColor(colors.lightBlue)
 term.setCursorPos((w / 6.5) - 2.5, (h / 6))
 print("Welcome!")
 term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 2)
-print("Select your username to begin.")
+print("Select your username to begin")
 
 local users = fs.list("/.tide_os/internalstorage/users")
 
@@ -41,7 +41,7 @@ for _, ufile in ipairs(users) do
 end
 
 term.setTextColor(colors.black)
-term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 4)
+term.setCursorPos((w / 6.5) - 2.5, (h / 6) + 5)
 
 local sr = fs.open("/.tide_os/internalstorage/config/showroot.bool", "r")
 
@@ -71,19 +71,24 @@ for _, name in ipairs(unames) do
     term.setCursorPos(x + 2, y)
 end
 
-while true do
-    local event, button, x, y = os.pullEvent("mouse_click")
+local event, button, x, y = os.pullEvent("mouse_click")
 
-    if button == 1 then
-        local posCounter = 0
+if button == 1 then
+    local posCounter = 0
 
-        for _, usrScreenPos in ipairs(usrScreenPositions) do
-            posCounter = posCounter + 1
+    for _, usrScreenPos in ipairs(usrScreenPositions) do
+        posCounter = posCounter + 1
 
-            if x >= usrScreenPos[1] and x <= usrScreenPos[2] and y == usrScreenPos[3] then
-                multishell.launch(require_env, "/.tide_os/programs/password.lua", users[posCounter])
-                multishell.setFocus(2)
-            end
+        if x >= usrScreenPos[1] and x <= usrScreenPos[2] and y == usrScreenPos[3] then
+            local id = multishell.launch({
+                ["shell"] = shell,
+                ["multishell"] = multishell,
+                ["require_env"] = require_env,
+                ["user_data"] = user_data
+            }, "/.tide_os/programs/password.lua", users[posCounter])
+            multishell.setFocus(id)
+            
+            shell.exit()
         end
     end
 end

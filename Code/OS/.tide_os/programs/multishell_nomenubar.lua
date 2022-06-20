@@ -268,7 +268,7 @@ launchProcess(true, {
     ["shell"] = shell,
     ["multishell"] = multishell,
     ["require_env"] = env
-}, "/.tide_os/programs/signon.lua")
+}, "/.tide_os/programs/core.lua")
 
 -- Run processes
 while #tProcesses > 0 do
