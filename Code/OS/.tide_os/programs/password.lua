@@ -1,4 +1,4 @@
-local shaLib = require("sha")
+local shaLib = require_env.require("sha")
 
 local args = {...}
 
@@ -13,17 +13,25 @@ local perm = usrf.readLine()
 usrf.close()
 
 local function youAreIn()
-    term.setBackgroundColor(colors.lime)
-    term.clear()
-    term.setCursorPos((w / 2) - 5, (h / 2))
-    term.setTextColor(colors.white)
-    print("Signed In!")
-    sleep(0.5)
-    term.clear()
-    term.setCursorPos((w / 2) - 9, (h / 2))
-    print("Loading Desktop...")
+    term.setBackgroundColor(colors.lightBlue)
+    term.setCursorPos((w / 2) - 14, (h / 6) + 1)
+    term.setTextColor(colors.green)
+    print("          Welcome!          ")
+    term.setCursorPos((w / 2) - 5, (h / 3) * 2)
     sleep(1)
-    return
+
+    user_data.username = user
+    user_data.permissions = perm
+    
+    local id = multishell.launch({
+        ["shell"] = shell,
+        ["multishell"] = multishell,
+        ["require_env"] = require_env,
+        ["user_data"] = user_data
+    }, "/.tide_os/programs/desktopmanager.lua")
+    multishell.setFocus(id)
+
+    shell.exit()
 end
 
 if pass == "<none>" then
@@ -34,6 +42,7 @@ end
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
 
 local function getPassword()
+    
     term.clear()
     paintutils.drawImage(bg, 1, 1)
 
@@ -79,5 +88,3 @@ local function getPassword()
 end
 
 getPassword()
-
-shell.exit()
