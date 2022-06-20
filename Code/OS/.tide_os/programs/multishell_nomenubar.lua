@@ -111,7 +111,7 @@ local function cullProcess(nProcess)
                 selectProcess(1)
             end
         end
-        nScrollPos = 1
+        nScrollPos = 0
         return true
     end
     return false
@@ -136,65 +136,20 @@ else
 end
 
 local function redrawMenu()
-    if false then
-        -- Draw menu
-        parentTerm.setCursorPos(1, 1)
-        parentTerm.setBackgroundColor(menuOtherBgColor)
-        parentTerm.clearLine()
-        local nCharCount = 0
-        local nSize = parentTerm.getSize()
-        if nScrollPos ~= 1 then
-            parentTerm.setTextColor(menuOtherTextColor)
-            parentTerm.setBackgroundColor(menuOtherBgColor)
-            parentTerm.write("<")
-            nCharCount = 1
-        end
-        for n = nScrollPos, #tProcesses do
-            if n == nCurrentProcess then
-                parentTerm.setTextColor(menuMainTextColor)
-                parentTerm.setBackgroundColor(menuMainBgColor)
-            else
-                parentTerm.setTextColor(menuOtherTextColor)
-                parentTerm.setBackgroundColor(menuOtherBgColor)
-            end
-            parentTerm.write(" " .. tProcesses[n].sTitle .. " ")
-            nCharCount = nCharCount + #tProcesses[n].sTitle + 2
-        end
-        if nCharCount > nSize then
-            parentTerm.setTextColor(menuOtherTextColor)
-            parentTerm.setBackgroundColor(menuOtherBgColor)
-            parentTerm.setCursorPos(nSize, 1)
-            parentTerm.write(">")
-            bScrollRight = true
-        else
-            bScrollRight = false
-        end
-
-        -- Put the cursor back where it should be
-        local tProcess = tProcesses[nCurrentProcess]
-        if tProcess then
-            tProcess.window.restoreCursor()
-        end
-    end
 end
 
 local function resizeWindows()
     local _, windowHeight = term.native().getSize()
     for n = 1, #tProcesses do
         local tProcess = tProcesses[n]
-        local x, y = tProcess.window.getCursorPos()
-        if false then
-            tProcess.window.scroll(y - windowHeight)
-            tProcess.window.setCursorPos(x, windowHeight)
-        end
         tProcess.window.reposition(1, 1, w, windowHeight)
     end
     bWindowsResized = true
 end
 
 local function setMenuVisible(bVis)
-    if bShowMenu ~= bVis then
-        bShowMenu = bVis
+    if true then
+        bShowMenu = false
         resizeWindows()
         redrawMenu()
     end
