@@ -200,6 +200,63 @@ function multishell.getTitle(n)
     return nil
 end
 
+--- Kills the process with the given ID.
+--
+-- @tparam number process The process index.
+-- @tparam number returnTo The process index to return to.
+-- @treturn boolean Returns true if the process was killed, false if there was
+-- no process to kill or return process
+function multishell.kill(process, returnTo)
+    expect(1, process, "number")
+    expect(2, returnTo, "number")
+    if process >= 1 and process <= #tProcesses and returnTo >= 1 and returnTo <= #tProcesses then
+        table.remove(tProcesses, process)
+        multishell.setFocus(returnTo)
+    end
+    return false
+end
+
+--- Kills the process with the given ID.
+--
+-- @tparam number process The process index.
+-- @treturn boolean Returns true if the process was killed, false if there was
+-- no process to kill or return process
+function multishell.kill(process)
+    expect(1, process, "number")
+    if process >= 1 and process <= #tProcesses then
+        table.remove(tProcesses, process)
+    end
+    return false
+end
+
+--- Return all tab titles
+--
+-- @treturn table Titles of all currently running processes
+-- @see getTitle
+function multishell.getTitles()
+    local titles = {}
+    for i = 1, #tProcesses, 1 do
+        table.insert(titles, multishell.getTitle(i))
+    end
+    return titles
+end
+
+--- Returns the process ID of the process with the given title
+--
+-- @tparam string str The process title.
+-- @treturn number|nil The process ID of the process with the given title
+-- or nil if there was no process found
+function multishell.getByTitle(str)
+    expect(1, str, "string")
+    local titles = multishell.getTitles()
+    for i = 1, #multishell.getTitles(), 1 do
+        if titles[i] == str then
+            return i
+        end
+    end
+    return nil
+end
+
 --- Set the title of the given process.
 --
 -- @tparam number n The process index.
