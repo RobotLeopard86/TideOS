@@ -23,9 +23,6 @@ local function launchDesktop()
         ["user_data"] = user_data
     }, "/.tide_os/programs/desktopmanager.lua")
     multishell.setFocus(id)
-
-    shell.exit()
-    return
 end
 
 local function youAreIn()
@@ -40,8 +37,7 @@ end
 
 local bg = paintutils.loadImage("/.tide_os/assets/images/password.ccpaint")
 
-local function getPassword()
-    
+local function getPassword()   
     term.clear()
     paintutils.drawImage(bg, 1, 1)
 
@@ -74,8 +70,6 @@ local function getPassword()
 
     if uinHashed == pass then
         youAreIn()
-        shell.exit()
-        return
     else
         term.setBackgroundColor(colors.lightBlue)
         term.setCursorPos((w / 2) - 13, (h / 6) + 1)
@@ -83,6 +77,8 @@ local function getPassword()
         print("    Password Incorrect    ")
         term.setCursorPos((w / 2) - 5, (h / 3) * 2)
         sleep(0.5)
+        shell.exit()
+        return
     end
 end
 
