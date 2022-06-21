@@ -28,11 +28,25 @@ term.setTextColor(colors.lightBlue)
 print("TideOS 2022.1 Now Loading...")
 term.setTextColor(colors.white)
 print()
-print("Setting everything up...")
-sleep(1)
-print("Preparing sign-on screen...")
-sleep(1)
-print("Let's go!")
-sleep(0.5)
 
-shell.run("/.tide_os/programs/multishell_nomenubar.lua")
+if fs.exists("/.tide_os/internalstorage/config/ok.bool") then
+    local okHandle = fs.open("/.tide_os/internalstorage/config/ok.bool", "r")
+    local isOk = okHandle.readAll()
+    okHandle.close()
+
+    if isOk == "true" then
+        print("Setting everything up...")
+        sleep(1)
+        print("Preparing sign-on screen...")
+        sleep(1)
+        print("Let's go!")
+        sleep(0.5)
+        shell.run("/.tide_os/programs/multishell_nomenubar.lua")
+    end
+end
+
+printError("You haven't completed post-install setup!")
+sleep(1)
+print("Taking you there now...")
+sleep(0.5)
+shell.run("/tideos_postinstall.lua")
