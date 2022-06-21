@@ -63,7 +63,7 @@ local function getPassword(isForRoot)
         frame.setTextColor(colors.red)
         frame.write("Password Is Too Long")
         sleep(1)
-        return getPassword()
+        return getPassword(isForRoot)
     end
     
     if pass == "" then
@@ -71,7 +71,7 @@ local function getPassword(isForRoot)
         frame.setTextColor(colors.red)
         frame.write("This Is A Required Field")
         sleep(1)
-        return getPassword()
+        return getPassword(isForRoot)
     end
 
     frame.setCursorPos(w / 14, 4)
@@ -83,7 +83,7 @@ local function getPassword(isForRoot)
         frame.setTextColor(colors.red)
         frame.write("Passwords Do Not Match")
         sleep(1)
-        return getPassword()
+        return getPassword(isForRoot)
     end
 
     return pass
