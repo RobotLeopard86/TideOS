@@ -83,7 +83,6 @@ local function getPassword()
         print("    Password Incorrect    ")
         term.setCursorPos((w / 2) - 5, (h / 3) * 2)
         sleep(0.5)
-        getPassword()
     end
 end
 
