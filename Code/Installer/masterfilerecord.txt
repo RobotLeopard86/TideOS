@@ -2,6 +2,8 @@
 /programs/signon.lua
 /programs/findperipherals.lua
 /programs/multishell_nomenubar.lua
+/programs/core.lua
+/programs/desktopmanager.lua
 /programs/lib/sha.lua
 /assets/images/signon.ccpaint
 /assets/images/password.ccpaint
