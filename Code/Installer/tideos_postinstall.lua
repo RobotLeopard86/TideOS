@@ -294,7 +294,7 @@ end
 if root == true then
     local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
     ru.writeLine("ROOT")
-    if password == "" then
+    if rootPassword == "" then
         ru.writeLine("<none>")
     else
         ru.writeLine(shaLib.sha(rootPassword .. salt))
