@@ -289,6 +289,11 @@ saltf.close()
 
 local comp = fs.open("/.tide_os/internalstorage/config/computer.tos", "w")
 comp.writeLine(computer)
+comp.close()
+
+local ok = fs.open("/.tide_os/internalstorage/config/ok.tos", "w")
+ok.writeLine("true")
+ok.close()
 
 local user = fs.open("/.tide_os/internalstorage/users/0.tos", "w")
 user.writeLine(username)
@@ -298,6 +303,14 @@ if password == "" then
 else
     user.writeLine(shaLib.sha(password .. salt))
 end
+
+if admin then
+    user.writeLine("ADMIN")
+else
+    user.writeLine("REG")
+end
+
+user.close()
 
 if root == true then
     local ru = fs.open("/.tide_os/internalstorage/users/root.tos", "w")
@@ -310,14 +323,6 @@ if root == true then
     ru.writeLine("SUPERUSER")
     ru.close()
 end
-
-if admin then
-    user.writeLine("ADMIN")
-else
-    user.writeLine("REG")
-end
-
-user.close()
 
 local showRoot = fs.open("/.tide_os/internalstorage/config/showroot.bool", "w")
 
