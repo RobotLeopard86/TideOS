@@ -65,6 +65,14 @@ local function getPassword(isForRoot)
         sleep(1)
         return getPassword()
     end
+    
+    if pass == "" then
+       frame.setCursorPos((w / 2) - 12, 1)
+        frame.setTextColor(colors.red)
+        frame.write("This Is A Required Field")
+        sleep(1)
+        return getPassword()
+    end
 
     frame.setCursorPos(w / 14, 4)
     frame.write("Confirm password: ")
