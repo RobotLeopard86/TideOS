@@ -7,5 +7,4 @@
 /programs/lib/sha.lua
 /assets/images/signon.ccpaint
 /assets/images/password.ccpaint
-/internalstorage/config/showroot.bool
 /internalstorage/salt.txt
