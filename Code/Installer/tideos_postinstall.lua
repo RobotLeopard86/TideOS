@@ -291,7 +291,7 @@ local comp = fs.open("/.tide_os/internalstorage/config/computer.tos", "w")
 comp.writeLine(computer)
 comp.close()
 
-local ok = fs.open("/.tide_os/internalstorage/config/ok.tos", "w")
+local ok = fs.open("/.tide_os/internalstorage/config/ok.bool", "w")
 ok.writeLine("true")
 ok.close()
 
