@@ -2,7 +2,7 @@ if pocket then
     printError("ERROR: TideOS cannot be run on a pocket computer!")
 end
 
-if term.isColor() then
+if not term.isColor() then
     printError("ERROR: TideOS requires color!")
 end
 
